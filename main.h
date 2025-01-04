@@ -5,13 +5,14 @@
 #include <assert.h>
 #include <stdlib.h>
 
-
-typedef char Type ;
-typedef char chunck ;
-
-void save();
-void load();
-chunck* generate_chunck(Type type);
-
+typedef enum {
+    PSEUDO = 1,
+    HOMEPAGE = 2,
+    CHARACTER = 3,
+    SCORES = 4,
+    GAME = 0,
+    DEATH = -1,
+    PAUSE = -2
+} Menu;
 
 #endif
