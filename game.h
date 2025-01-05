@@ -1,9 +1,11 @@
 #ifndef _GAME_H
 #define _GAME_H
 
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <sys/time.h>
 
 
 #define RED      "\x1b[31m"
@@ -30,6 +32,7 @@ typedef enum {
     SPIDER = 3
 } Enemy;
 
+void game();
 void save();
 void load();
 Chunck* generate_chunck(Type_c type);
