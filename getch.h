@@ -9,4 +9,6 @@
 #include <string.h>
 #include <unistd.h>
 
+int getch();
+
 #endif

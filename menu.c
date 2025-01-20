@@ -1,9 +1,9 @@
-#include "getch.c"
 #include "menu.h"
 
 void menus(bool* in_menus) {
+    char choix;
     Menu menu = HOMEPAGE;
-    bool changing_menu = false;
+    bool changing_menu = true;
     while (*in_menus) {
         //changing_menu?printf("yes\n\n"):printf("no\n\n");
 
@@ -37,7 +37,7 @@ void menus(bool* in_menus) {
 
 void draw_menu(Menu menu) {
     FILE *file;
-    char filename[20] = "homepage.txt";
+    char filename[20] = "homepage1.txt";
     char line[50];
 
     file = fopen(filename, "r");
@@ -47,7 +47,6 @@ void draw_menu(Menu menu) {
     while (fgets(line, sizeof(line), file) != NULL) {
         printf("%s", line);
     }
-    printf("\ni'm done\n\n");
     fclose(file);
 }
 

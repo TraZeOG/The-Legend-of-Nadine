@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <sys/time.h>
 
+#include "player.h"
+#include "board.h"
+#include "getch.h"
 
 #define RED      "\x1b[31m"
 #define GREEN    "\x1b[32m"
@@ -32,7 +35,7 @@ typedef enum {
     SPIDER = 3
 } Enemy;
 
-void game();
+void game (bool* in_menus, Coord player, int ROW, int COL, char board[ROW][COL]);
 void save();
 void load();
 Chunck* generate_chunck(Type_c type);

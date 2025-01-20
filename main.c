@@ -1,7 +1,6 @@
-#include "menu.c"
-#include "game.c"
+#include "main.h"
 
-int main () {
+int main() {
     bool in_menus = true;
     int run = true;
     while (run) {
@@ -9,7 +8,11 @@ int main () {
             menus(&in_menus);
         }
         else {
-            game(&in_menus);
+            Coord player = {20, 20};
+            char board[28][132] ;
+            int ROW = 28;
+            int COL = 132;
+            game(&in_menus, player, ROW, COL, board);
         }
     }
 }

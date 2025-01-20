@@ -1,5 +1,7 @@
 #include "player.h"
 
+
+
 void move_player(Coord* player, Dir input) {
     if (input == NORTH && player->y > 0) player->y--;
     if (input == SOUTH && player->y < 40) player->y++;

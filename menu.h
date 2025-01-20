@@ -1,7 +1,9 @@
 #ifndef _MENU_H
 #define _MENU_H
 
-char choix;
+#include "getch.h"
+
+extern char choix;
 typedef enum {
     HOMEPAGE = 1,
     USERNAME = 2,

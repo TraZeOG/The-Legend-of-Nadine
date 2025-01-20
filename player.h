@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-typedef enum { //names speak for themselves
+typedef enum {
     NORTH = 'z',
     EAST = 'd',
     SOUTH = 's',
@@ -16,9 +16,9 @@ typedef struct {
     int x;
     int y;
 } Coord;
-Coord player = {20, 20};
+extern Coord player;
 
 void move_player(Coord* player, Dir dir);
-bool check_collision(Coord cos);
+bool check_collision(Coord coss);
 
 #endif

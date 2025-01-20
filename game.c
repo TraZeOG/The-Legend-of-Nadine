@@ -1,12 +1,9 @@
 #include "game.h"
-#include "player.c"
-#include "board.c"
-#include <sys/time.h>
 
-#define clear() printf("\033[H\033[J")
+            
 
-void game () {
-    board = init_board(ROW, COL, board[ROW][COL]);
+void game (bool* in_menus, Coord player, int ROW, int COL, char board[ROW][COL]) {
+    init_board(ROW, COL, board);
     // Time variables
     double refresh_rate = 0.06;
     struct timeval last, now; 
@@ -20,13 +17,10 @@ void game () {
         double time_taken = (now.tv_sec - last.tv_sec) + (now.tv_usec - last.tv_usec) * 1e-6;
         if (time_taken > refresh_rate) {
             last = now;
-            move_player(player, n);
+            move_player(&player, n);
             print_board(ROW, COL, board);
         }
 
-
-
-
-        usleep(5000); 
+        usleep(10000); 
     }
 }
