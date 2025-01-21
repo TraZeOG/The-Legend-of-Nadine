@@ -19,6 +19,7 @@ void init_board(int row, int col, char board[row][col]) {
 }
 
 void print_board(int row, int col, char board[row][col]) {
+    clear();
     for (int i = row - 1; i >= 0; i--) {
         for (int j = 0; j < col; j++) {
             printf("%c", board[i][j]);

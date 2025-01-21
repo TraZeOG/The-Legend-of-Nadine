@@ -37,13 +37,14 @@ void menus(bool* in_menus) {
 
 void draw_menu(Menu menu) {
     FILE *file;
-    char filename[20] = "homepage1.txt";
+    char filename[20] = "homepage.txt";
     char line[50];
 
     file = fopen(filename, "r");
     if (file == NULL) {
         printf("Error: Could not open file %s\n", filename);
     }
+    clear();
     while (fgets(line, sizeof(line), file) != NULL) {
         printf("%s", line);
     }

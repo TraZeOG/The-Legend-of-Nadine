@@ -16,7 +16,6 @@ typedef struct {
     int x;
     int y;
 } Coord;
-extern Coord player;
 
 void move_player(Coord* player, Dir dir);
 bool check_collision(Coord coss);

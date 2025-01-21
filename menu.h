@@ -3,6 +3,8 @@
 
 #include "getch.h"
 
+#define clear() printf("\033[H\033[J")
+
 extern char choix;
 typedef enum {
     HOMEPAGE = 1,

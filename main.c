@@ -3,6 +3,8 @@
 int main() {
     bool in_menus = true;
     int run = true;
+    printf("\033[?25l");
+    clear();
     while (run) {
         if (in_menus) {
             menus(&in_menus);
