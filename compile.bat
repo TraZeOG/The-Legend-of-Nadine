@@ -1,1 +1,1 @@
-gcc -g -fopenmp -lpthread -Wall -Wextra -Wpedantic -Wshadow -Wformat=0 -Wcast-align -Wnull-dereference -g3 -O0 main.c board.o player.o menu.o getch.o game.o
+gcc -g  main.c board.o player.o menu.o getch.o game.o
