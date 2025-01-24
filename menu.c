@@ -1,22 +1,20 @@
 #include "menu.h"
 
-void menus(bool* in_menus) {
+void menus(bool* in_menus, bool* changing_menu) {
     char choix;
     Menu menu = HOMEPAGE;
-    bool changing_menu = true;
     while (*in_menus) {
         //changing_menu?printf("yes\n\n"):printf("no\n\n");
 
-        if (changing_menu) {
+        if (*changing_menu) {
             draw_menu(menu);
-            changing_menu = false;
+            *changing_menu = false;
         }
         else {
             if (menu == HOMEPAGE) {
                 choix = getch();
                 if (choix == 's' || choix == 'S') {
-                    menu = USERNAME;
-                    changing_menu = true;
+                    *in_menus = false;
                 }
             }
 

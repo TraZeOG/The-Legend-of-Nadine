@@ -1,1 +1,1 @@
-gcc -g  main.c board.o player.o menu.o getch.o game.o
+gcc -g  main.c board.c player.c menu.c getch.c game.c

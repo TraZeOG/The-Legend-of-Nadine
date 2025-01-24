@@ -2,7 +2,8 @@
 
             
 
-void game (bool* in_menus, Coord player, int ROW, int COL, char board[ROW][COL]) {
+void game (bool* in_menus, Coord player, int ROW, int COL, wchar_t board[ROW][COL]) {
+    setlocale(LC_ALL, "");
     init_board(ROW, COL, board);
     // Time variables
     double refresh_rate = 0.06;

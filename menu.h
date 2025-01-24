@@ -12,7 +12,7 @@ typedef enum {
     DEATH = 3,
 } Menu;
 
-void menus();
-void draw_menu();
+void menus(bool* in_menus, bool* changing_menu);
+void draw_menu(Menu menu);
 
 #endif
