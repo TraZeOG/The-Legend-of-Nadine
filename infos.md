@@ -2,8 +2,10 @@
 
 what could be added/improved/reworked:
 
-- unicode characters
-- ots of game design cause i love it
+- DONE unicode characters
+
+- chunck system
+- lots of game design cause i love it
 - stargates
 - gates tout court
 - enemies
