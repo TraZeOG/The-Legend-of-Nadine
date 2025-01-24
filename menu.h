@@ -2,10 +2,10 @@
 #define _MENU_H
 
 #include "getch.h"
-
 #include <wchar.h>
 #include <locale.h>
-#define clear() printf("\033[H\033[J")
+
+#define clear() wprintf(L"\033[H\033[J")
 
 extern char choix;
 typedef enum {

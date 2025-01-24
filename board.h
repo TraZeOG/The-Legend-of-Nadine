@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <locale.h>
-//#define clear() printf("\033[H\033[J")
+#define clear() wprintf(L"\033[H\033[J")
 
 typedef struct {
     int row;

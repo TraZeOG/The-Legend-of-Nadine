@@ -11,13 +11,17 @@
  * @return A pointer to the initialized board structure.
  */
 board* init_board(int row, int col) {
+    clear();
     board* b = malloc(sizeof(board));
     b->board = malloc(sizeof(wchar_t*) * row);
     for (int i = 0; i < row; i++) {
         b->board[i] = malloc(sizeof(wchar_t) * col);
-        b->board[i][0] = L'\u2655';
-        for (int j = 1; j < col; j++) {
-            b->board[i][j] = L' ';
+        for (int j = 0; j < col; j++) {
+            if (i == 0 || i == row-1 || j == 0 || j == col-1) {
+                b->board[i][j] = L'\U0001F9F1';
+            } else {
+                b->board[i][j] = L' ';
+            }
         }
     }
     b->row = row;
@@ -30,7 +34,7 @@ board* init_board(int row, int col) {
  * @param b A pointer to the board structure to be printed.
  */
 void print_board(board* b) {
-    //clear();
+    clear();
     setlocale(LC_ALL, "");
     for (int i = 0; i < b->row; i++) {
         for (int j = 0; j < b->col; j++) {
