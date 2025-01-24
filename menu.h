@@ -3,6 +3,8 @@
 
 #include "getch.h"
 
+#include <wchar.h>
+#include <locale.h>
 #define clear() printf("\033[H\033[J")
 
 extern char choix;

@@ -1,7 +1,6 @@
 #ifndef _GAME_H
 #define _GAME_H
 
-#include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -35,7 +34,7 @@ typedef enum {
     SPIDER = 3
 } Enemy;
 
-void game (bool* in_menus, Coord player, board board);
+void game (bool* in_menus, Coord player, board* board);
 void save();
 void load();
 Chunck* generate_chunck(Type_c type);

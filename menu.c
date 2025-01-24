@@ -40,11 +40,11 @@ void draw_menu(Menu menu) {
 
     file = fopen(filename, "r");
     if (file == NULL) {
-        printf("Error: Could not open file %s\n", filename);
+        wprintf(L"Error: Could not open file %s\n", filename);
     }
-    clear();
+    //clear();
     while (fgets(line, sizeof(line), file) != NULL) {
-        printf("%s", line);
+        wprintf(L"%s", line);
     }
     fclose(file);
 }

@@ -2,7 +2,6 @@
 #define _PLAYER_H
 
 #include <stdbool.h>
-#include <assert.h>
 #include <stdlib.h>
 
 typedef enum {

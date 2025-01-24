@@ -3,9 +3,8 @@
 
 #include <stdio.h>
 #include <wchar.h>
-#include <stdlib.h>
 #include <locale.h>
-#define clear() printf("\033[H\033[J")
+//#define clear() printf("\033[H\033[J")
 
 typedef struct {
     int row;
@@ -13,7 +12,7 @@ typedef struct {
     wchar_t** board;
 } board;
 
-board init_board(int row, int col);
-void print_board(board b);
+board* init_board(int row, int col);
+void print_board(board* b);
 
 #endif
