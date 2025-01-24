@@ -2,29 +2,26 @@
 
 
 
-void init_board(int row, int col, wchar_t board[row][col]) {
-    for (int i=0; i<row; i++) {
-        for (int j=0; j<col; j++) {
-            if (i==0 || i==row-1) {
-                board[i][j] = '=';
-            }
-            else if (j==0 || j==col-1) {
-                board[i][j] = '|';
-            }
-            else {
-                board[i][j] = ' ';
-            }
+board init_board(int row, int col) {
+    board* b = malloc(sizeof(board));
+    for (int i = 0; i < row; i++) {
+        b->board[i] = malloc(sizeof(wchar_t) * col);
+        b->board[i][0] = L' ';
+        for (int j = 1; j < col; j++) {
+            b->board[i][j] = L' ';
         }
     }
+    b->row = row;
+    b->col = col;
+    return *b;
 }
 
-void print_board(int row, int col, wchar_t board[row][col]) {
-    clear();
+void print_board(board b) {
+    //clear();
     setlocale(LC_ALL, "");
-    for (int i = row - 1; i >= 0; i--) {
-        for (int j = 0; j < col; j++) {
-            wprintf(L"%lc", board[i][j]);
-            wprintf(L"🌳rorar je suis un arbre");
+    for (int i = 0; i < b.row; i++) {
+        for (int j = 0; j < b.col; j++) {
+            wprintf(L"%lc", b.board[i][j]);
             fflush(stdout);
         }
         wprintf(L"\n");

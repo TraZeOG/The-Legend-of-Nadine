@@ -2,9 +2,8 @@
 
             
 
-void game (bool* in_menus, Coord player, int ROW, int COL, wchar_t board[ROW][COL]) {
+void game (bool* in_menus, Coord player, board board) {
     setlocale(LC_ALL, "");
-    init_board(ROW, COL, board);
     // Time variables
     double refresh_rate = 0.06;
     struct timeval last, now; 
@@ -19,7 +18,7 @@ void game (bool* in_menus, Coord player, int ROW, int COL, wchar_t board[ROW][CO
         if (time_taken > refresh_rate) {
             last = now;
             move_player(&player, n);
-            print_board(ROW, COL, board);
+            print_board(board);
         }
 
         usleep(10000); 
