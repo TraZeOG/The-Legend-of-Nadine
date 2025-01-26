@@ -2,9 +2,8 @@
 #define _BOARD_H
 
 #include <stdio.h>
-#include <wchar.h>
-#include <locale.h>
-#define clear() wprintf(L"\033[H\033[J")
+#include <stdlib.h>
+#include "unitech.h"
 
 typedef struct {
     int row;
@@ -13,6 +12,5 @@ typedef struct {
 } board;
 
 board* init_board(int row, int col);
-void print_board(board* b);
 
 #endif

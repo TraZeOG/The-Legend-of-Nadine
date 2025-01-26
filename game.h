@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 
-#include "player.h"
-#include "board.h"
+#include "render.h"
 #include "getch.h"
 
 #define RED      "\x1b[31m"

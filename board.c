@@ -1,6 +1,4 @@
 #include "board.h"
-#include <stdlib.h>
-#include <locale.h>
 
 
 
@@ -27,20 +25,4 @@ board* init_board(int row, int col) {
     b->row = row;
     b->col = col;
     return b;
-}
-
-/**
- * @brief Prints the board to the console.
- * @param b A pointer to the board structure to be printed.
- */
-void print_board(board* b) {
-    clear();
-    setlocale(LC_ALL, "");
-    for (int i = 0; i < b->row; i++) {
-        for (int j = 0; j < b->col; j++) {
-            wprintf(L"%lc", b->board[i][j]);
-        }
-        wprintf(L"\n");
-        fflush(stdout);
-    }
 }

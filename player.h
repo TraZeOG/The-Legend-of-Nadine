@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include "unitech.h"
+#include "board.h"
 
 typedef enum {
     NORTH = 'z',
@@ -16,7 +18,7 @@ typedef struct {
     int y;
 } Coord;
 
-void move_player(Coord* player, Dir dir);
+void move_player(Coord* player, Dir dir, board board);
 bool check_collision(Coord coss);
 
 #endif
