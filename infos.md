@@ -1,16 +1,17 @@
 # INFOS
 
-what could be added/improved/reworked:
+what could be added/improved/reworked (by order of priority):
 
 - DONE unicode characters
 
+- a player that can move
+- gates
 - chunck system
 - lots of game design cause i love it
-- stargates
-- gates tout court
-- enemies
 - walls
-- hotbars
-- multiplayer omg?? (spoiler no)
+- stargates
+- enemies
 - health system
+- hotbars
 - score system?
+- multiplayer omg?? (spoiler no)
