@@ -2,7 +2,7 @@
 
             
 
-void game (bool* in_menus, Coord player, board* board) {
+void game (bool* in_menus, Player* player, board* board) {
     setlocale(LC_ALL, "");
     // Time variables
     double refresh_rate = 0.06;
@@ -17,7 +17,7 @@ void game (bool* in_menus, Coord player, board* board) {
         double time_taken = (now.tv_sec - last.tv_sec) + (now.tv_usec - last.tv_usec) * 1e-6;
         if (time_taken > refresh_rate) {
             last = now;
-            move_player(&player, n, *board);
+            move_player(player, n, board);
             //printf("hello world\n");
             print_board(board);
         }

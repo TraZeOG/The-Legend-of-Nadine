@@ -33,7 +33,7 @@ typedef enum {
     SPIDER = 3
 } Enemy;
 
-void game (bool* in_menus, Coord player, board* board);
+void game (bool* in_menus, Player* player, board* board);
 void save();
 void load();
 Chunck* generate_chunck(Type_c type);
