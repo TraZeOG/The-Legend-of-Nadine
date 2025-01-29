@@ -18,7 +18,12 @@ typedef struct {
     int y;
 } Coord;
 
-void move_player(Coord* player, Dir dir, board board);
-bool check_collision(Coord coss);
+typedef struct {
+    int x;
+    int y;
+} Player;
+
+void move_player(Player* player, Dir dir, board* board);
+bool check_collision(Player* player, int x, int y, board* board);
 
 #endif

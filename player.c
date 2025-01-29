@@ -2,11 +2,20 @@
 
 
 
-void move_player(Coord* player, Dir input, board board) {
-    if (input == NORTH && player->y > 0) player->y--;
-    if (input == SOUTH && player->y < 40) player->y++;
-    if (input == WEST && player->x > 0) player->x--;
-    if (input == EAST && player->x < 40) player->x++;
-    board.board[player->y][player->x] = L'\U0001F9D9';
+void move_player(Player* player, Dir input, board* board) {
+    board->board[player->y][player->x].sprite = SPRITE_VOID;
+    if (input == NORTH && !check_collision(player, player->x, player->y - 1, board)) player->y--;
+    if (input == SOUTH && !check_collision(player, player->x, player->y + 1, board)) player->y++;
+    if (input == WEST && !check_collision(player, player->x - 1, player->y, board)) player->x--;
+    if (input == EAST && !check_collision(player, player->x + 1, player->y, board)) player->x++;
+    board->board[player->y][player->x].sprite = SPRITE_PLAYER;
 }
 
+bool check_collision(Player* player, int x, int y, board* board) {
+    if (board->board[y][x].type != VOID) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
