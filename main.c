@@ -6,7 +6,7 @@ int main() {
     setlocale(LC_ALL, "");
     wprintf(L"\033[?25l");
     clear();
-    Coord player = {20, 20};
+    Player player = {20, 20};
     board* board = init_board(28, 80); //height and width of the 🥛Caseine terminal
     int run = true;
     while (run) {
@@ -14,7 +14,7 @@ int main() {
             menus(&in_menus, &changing_menu);
         }
         else {
-            game(&in_menus, player, board);
+            game(&in_menus, &player, board);
         }
     }
 }
