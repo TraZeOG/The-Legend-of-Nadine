@@ -8,26 +8,16 @@
 
 typedef enum {
     VOID = 0,
-    WALL = 1,
-    ENEMY = 2,
-    LOOT = 3,
-    GATE = 4,
-    NB_TYPES = 5,
+    PLAYER = 1,
+    WALL = 2,
+    ENEMY = 3,
+    LOOT = 4,
+    GATE = 5,
 } Type;
-
-
-typedef enum {
-    SPRITE_VOID,
-    SPRITE_PLAYER,
-    SPRITE_WALL,
-    SPRITE_ENEMY,
-    SPRITE_LOOT,
-    SPRITE_GATE
-} Sprite;
 
 typedef struct {
     Type type;
-    Sprite sprite;
+    int health;
 } Bloc;
 
 typedef struct {
@@ -37,5 +27,7 @@ typedef struct {
 } board;
 
 board* init_board(int row, int col);
+void save_chunck(board* board, char* name);
+board* load_chunck(char* name);
 
 #endif
