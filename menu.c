@@ -35,7 +35,7 @@ void menus(bool* in_menus, bool* changing_menu) {
 
 void draw_menu(Menu menu) {
     FILE *file;
-    char filename[20] = "homepage.txt";
+    char filename[20] = "homepage.eota";
     char line[50];
 
     file = fopen(filename, "r");

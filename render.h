@@ -6,6 +6,5 @@
 extern const wchar_t SPRITES[];
 
 void print_board(board* b);
-void print_player(Coord* player, board board);
 
 #endif

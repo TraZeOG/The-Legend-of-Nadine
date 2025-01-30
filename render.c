@@ -8,7 +8,7 @@ const wchar_t SPRITES[] = {
     L'\U0001F9F1', // SPRITE_WALL 🧱
     L'\U0001F9DF', // SPRITE_ENEMY 🧟
     L'\U0001F48E', // SPRITE_LOOT 💎
-    L'\U0001F6AA'  // SPRITE_GATE 🚪
+    L'\U0001F6AA',  // SPRITE_GATE 🚪
 };
 
 /**
@@ -20,10 +20,10 @@ void print_board(board* b) {
     wprintf(L"\033[H");
     for (int i = 0; i < b->row; i++) {
         for (int j = 0; j < b->col; j++) {
-            if (b->board[i][j].sprite == SPRITE_VOID) {
+            if (b->board[i][j].type == VOID) {
                 wprintf(L"  ");
             } else {
-                wprintf(L"%lc", SPRITES[b->board[i][j].sprite]);
+                wprintf(L"%lc", SPRITES[b->board[i][j].type]);
             }
         }
         wprintf(L"\n");
