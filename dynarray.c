@@ -1,15 +1,42 @@
 #include <dynarray.h>
 
 
+typedef struct {
+    int type;
+    bool loaded;
+    int x;
+    int y;
+} Chunck;
+
+typedef struct {
+    Chunck** chunck;
+    size_t capacity;
+} Map;
 
 /**
  * @brief Initializes a dynamic array.
  * @param array Pointer to the dynamic array to be initialized.
  */
-void create(DynArray *array) {
-    array->data = NULL;
-    array->size = 0;
-    array->capacity = 0;
+
+Chunck* create_chunck(int type, int x, int y) {
+    Chunck* chunck = malloc(sizeof(Chunck));
+    chunck->loaded = false;
+    chunck->type = type;
+    chunck->x = x;
+    chunck->y = y;
+}
+
+Map* create_map() {
+    Map* map = malloc(sizeof(Map));
+    map->chunck = malloc(INITIAL_CAPACITY * sizeof(Chunck**));
+    map->capacity = INITIAL_CAPACITY;
+    for(size_t i = 0; i < INITIAL_CAPACITY; i++){
+        array->chunck[i] = malloc(sizeof(Chunck*));
+        for (size_t j = 0; j < INITIAL_CAPACITY; j++) {
+            array->chunck[i][j] = create_chunck(rand()%NB_TYPES, i, j);
+        }
+    }
+    return map;
 }
 
 /**
@@ -17,7 +44,7 @@ void create(DynArray *array) {
  * @param array Pointer to the dynamic array.
  * @return The number of elements in the dynamic array.
  */
-size_t length(DynArray *array) {
+size_t length(Map* map) {
     return array->size;
 }
 
@@ -27,7 +54,7 @@ size_t length(DynArray *array) {
  * @param index The index of the element to retrieve.
  * @return The element at the specified index, or -1 if the index is out of bounds.
  */
-int get(DynArray *array, size_t index) {
+int get(Map* map, size_t index) {
     if (index >= array->size) {
         return -1;
     }
@@ -41,7 +68,7 @@ int get(DynArray *array, size_t index) {
  * @param value The value of the element to insert.
  * @return true if the insertion was successful, false otherwise.
  */
-bool insert(DynArray *array, size_t index, int value) {
+bool insert(Map* map, size_t index, int value) {
     if (index > array->size) {
         return false;
     }
@@ -68,7 +95,7 @@ bool insert(DynArray *array, size_t index, int value) {
  * @param index The index of the element to remove.
  * @return true if the removal was successful, false otherwise.
  */
-bool remove(DynArray *array, size_t index) {
+bool remove(Map* map, size_t index) {
     if (index >= array->size) {
         return false;
     }
@@ -83,7 +110,7 @@ bool remove(DynArray *array, size_t index) {
  * @brief Frees the memory allocated for the dynamic array.
  * @param array Pointer to the dynamic array to be freed.
  */
-void free(DynArray *array) {
+void free(Map* map) {
     free(array->data);
     array->data = NULL;
     array->size = 0;

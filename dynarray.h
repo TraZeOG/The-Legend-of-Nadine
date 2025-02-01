@@ -6,19 +6,25 @@
 #include <stdio.h>
 #include <sys/time.h>
 
-#define INITIAL_CAPACITY 4
+#define INITIAL_CAPACITY 10
 
 typedef struct {
-    int *data;
-    size_t size;
-    size_t capacity;
-} DynArray;
+    int type;
+    bool loaded;
+    int x;
+    int y;
+} Chunck;
 
-void create(DynArray *array);
-size_t length(DynArray *array);
-int get(DynArray *array, size_t index);
-bool insert(DynArray *array, size_t index, int value);
-bool remove(DynArray *array, size_t index);
-void free(DynArray *array);
+typedef struct {
+    Chunck** chunck;
+    size_t capacity;
+} Map;
+
+void create(Map *array);
+size_t length(Map *array);
+int get(Map *array, size_t index);
+bool insert(Map *array, size_t index, int value);
+bool remove(Map *array, size_t index);
+void free(Map *array);
 
 #endif
