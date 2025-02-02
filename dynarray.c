@@ -1,18 +1,5 @@
 #include <dynarray.h>
 
-
-typedef struct {
-    int type;
-    bool loaded;
-    int x;
-    int y;
-} Chunck;
-
-typedef struct {
-    Chunck** chunck;
-    size_t capacity;
-} Map;
-
 /**
  * @brief Initializes a dynamic array.
  * @param array Pointer to the dynamic array to be initialized.
@@ -44,8 +31,8 @@ Map* create_map() {
  * @param array Pointer to the dynamic array.
  * @return The number of elements in the dynamic array.
  */
-size_t length(Map* map) {
-    return array->size;
+size_t len(Map* map) {
+    return map->capacity;
 }
 
 /**
@@ -54,11 +41,8 @@ size_t length(Map* map) {
  * @param index The index of the element to retrieve.
  * @return The element at the specified index, or -1 if the index is out of bounds.
  */
-int get(Map* map, size_t index) {
-    if (index >= array->size) {
-        return -1;
-    }
-    return array->data[index];
+Chunck* get_chunck(Map* map, Cos* cos) {
+    return &(map->chunck[cos->x][cos->y]);
 }
 
 /**
@@ -68,42 +52,17 @@ int get(Map* map, size_t index) {
  * @param value The value of the element to insert.
  * @return true if the insertion was successful, false otherwise.
  */
-bool insert(Map* map, size_t index, int value) {
-    if (index > array->size) {
-        return false;
-    }
-    if (array->size == array->capacity) {
-        size_t new_capacity = array->capacity == 0 ? 1 : array->capacity * 2;
-        int *new_data = realloc(array->data, new_capacity * sizeof(int));
-        if (new_data == NULL) {
-            return false;
+void expand(Map* map) {
+    Chunck** new_chuncks = malloc(sizeof(Chunck**) * 2 * map->capacity);
+    for (size_t i = 0; i < map->capacity; i++) {
+        new_chuncks[i] = malloc(sizeof(Chunck*) * 2 * map->capacity);
+        for (size_t j = 0; j < map->capacity; j++) {
+            new_chuncks[i][j] = map->chunck[i][j];
         }
-        array->data = new_data;
-        array->capacity = new_capacity;
     }
-    for (size_t i = array->size; i > index; --i) {
-        array->data[i] = array->data[i - 1];
-    }
-    array->data[index] = value;
-    array->size++;
-    return true;
-}
-
-/**
- * @brief Removes an element from the dynamic array.
- * @param array Pointer to the dynamic array.
- * @param index The index of the element to remove.
- * @return true if the removal was successful, false otherwise.
- */
-bool remove(Map* map, size_t index) {
-    if (index >= array->size) {
-        return false;
-    }
-    for (size_t i = index; i < array->size - 1; ++i) {
-        array->data[i] = array->data[i + 1];
-    }
-    array->size--;
-    return true;
+    free(map->chunck);
+    map->chunck = new_chuncks;
+    map->capacity *= 2;
 }
 
 /**
