@@ -17,7 +17,7 @@
 #define CYAN     "\x1b[36m"
 #define WHITE    "\x1b[0m"
 
-typedef char Chunck ;
+typedef char chunk ;
 
 typedef enum { //names speak for themselves
     SPAWN = 0,
@@ -36,7 +36,7 @@ typedef enum {
 void game (bool* in_menus, Player* player, board* board);
 void save();
 void load();
-Chunck* generate_chunck(Type_c type);
-void print_chunck(Chunck chunk);
+chunk* generate_chunk(Type_c type);
+void print_chunk(chunk chunk);
 
 #endif

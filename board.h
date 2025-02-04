@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "unitech.h"
+#include <string.h>
 
 
 typedef enum {
@@ -27,7 +28,7 @@ typedef struct {
 } board;
 
 board* init_board(int row, int col);
-void save_chunck(board* board, char* name);
-board* load_chunck(char* name);
+void load_chunk(char* name, board* board);
+void default_chunk(board* board);
 
 #endif

@@ -6,8 +6,9 @@ void game (bool* in_menus, Player* player, board* board) {
     setlocale(LC_ALL, "");
     // Time variables
     double refresh_rate = 0.06;
-    struct timeval last, now; 
+    struct timeval last, now;
     gettimeofday(&last, NULL);
+    default_chunk(board);
 
     ///boucle principale ----------------------------------------------------
     int run = true ;
@@ -21,6 +22,11 @@ void game (bool* in_menus, Player* player, board* board) {
             //printf("hello world\n");
             print_board(board);
         }
+
+        if (board->board[player->y][player->x + 1].type == GATE) {
+            load_chunk("chunk_1", board);
+        }
+
 
         usleep(10000); 
     }
