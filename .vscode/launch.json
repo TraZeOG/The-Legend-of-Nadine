@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/thoma/Code/C/Doan2 - Echoes of the Abyss",
-      "program": "c:/Users/thoma/Code/C/Doan2 - Echoes of the Abyss/build/Debug/outDebug",
+      "cwd": "c:/Users/thoma/Code/C/EOTA",
+      "program": "c:/Users/thoma/Code/C/EOTA/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

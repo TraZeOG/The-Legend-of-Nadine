@@ -5,22 +5,22 @@
  * @param array Pointer to the dynamic array to be initialized.
  */
 
-Chunck* create_chunck(int type, int x, int y) {
-    Chunck* chunck = malloc(sizeof(Chunck));
-    chunck->loaded = false;
-    chunck->type = type;
-    chunck->x = x;
-    chunck->y = y;
+Chunk* create_chunk(int type, int x, int y) {
+    Chunk* chunk = malloc(sizeof(Chunk));
+    chunk->loaded = false;
+    chunk->type = type;
+    chunk->x = x;
+    chunk->y = y;
 }
 
 Map* create_map() {
     Map* map = malloc(sizeof(Map));
-    map->chunck = malloc(INITIAL_CAPACITY * sizeof(Chunck**));
+    map->chunk = malloc(INITIAL_CAPACITY * sizeof(Chunk**));
     map->capacity = INITIAL_CAPACITY;
     for(size_t i = 0; i < INITIAL_CAPACITY; i++){
-        array->chunck[i] = malloc(sizeof(Chunck*));
+        array->chunk[i] = malloc(sizeof(Chunk*));
         for (size_t j = 0; j < INITIAL_CAPACITY; j++) {
-            array->chunck[i][j] = create_chunck(rand()%NB_TYPES, i, j);
+            array->chunk[i][j] = create_chunk(rand()%NB_TYPES, i, j);
         }
     }
     return map;
@@ -41,8 +41,8 @@ size_t len(Map* map) {
  * @param index The index of the element to retrieve.
  * @return The element at the specified index, or -1 if the index is out of bounds.
  */
-Chunck* get_chunck(Map* map, Cos* cos) {
-    return &(map->chunck[cos->x][cos->y]);
+Chunk* get_chunk(Map* map, Cos* cos) {
+    return &(map->chunk[cos->x][cos->y]);
 }
 
 /**
@@ -53,15 +53,15 @@ Chunck* get_chunck(Map* map, Cos* cos) {
  * @return true if the insertion was successful, false otherwise.
  */
 void expand(Map* map) {
-    Chunck** new_chuncks = malloc(sizeof(Chunck**) * 2 * map->capacity);
+    Chunk** new_chunks = malloc(sizeof(Chunk**) * 2 * map->capacity);
     for (size_t i = 0; i < map->capacity; i++) {
-        new_chuncks[i] = malloc(sizeof(Chunck*) * 2 * map->capacity);
+        new_chunks[i] = malloc(sizeof(Chunk*) * 2 * map->capacity);
         for (size_t j = 0; j < map->capacity; j++) {
-            new_chuncks[i][j] = map->chunck[i][j];
+            new_chunks[i][j] = map->chunk[i][j];
         }
     }
-    free(map->chunck);
-    map->chunck = new_chuncks;
+    free(map->chunk);
+    map->chunk = new_chunks;
     map->capacity *= 2;
 }
 

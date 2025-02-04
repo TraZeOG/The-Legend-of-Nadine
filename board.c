@@ -14,9 +14,18 @@ board* init_board(int row, int col) {
     b->board = malloc(sizeof(Bloc) * row);
     for (int i = 0; i < row; i++) {
         b->board[i] = malloc(sizeof(Bloc) * col);
-        for (int j = 0; j < col; j++) {
-            if (i == 0 || i == row-1 || j == 0 || j == col-1) {
-                if ((i == 0 || i == row-1) && (j == col/2 || j == col/2 - 1) || (j == 0 || j == col-1) && (i == row/2 || i == row/2 - 1)) {
+    }
+    b->row = row;
+    b->col = col;
+    return b;
+}
+
+void default_chunk(board* b) {
+    for (int i = 0; i < b->row; i++) {
+        b->board[i] = malloc(sizeof(Bloc) * b->col);
+        for (int j = 0; j < b->col; j++) {
+            if (i == 0 || i == b->row-1 || j == 0 || j == b->col-1) {
+                if ((i == 0 || i == b->row-1) && (j == b->col/2 || j == b->col/2 - 1) || (j == 0 || j == b->col-1) && (i == b->row/2 || i == b->row/2 - 1)) {
                     b->board[i][j].type = GATE;
                 }
                 else {
@@ -28,51 +37,38 @@ board* init_board(int row, int col) {
             }
         }
     }
-    b->row = row;
-    b->col = col;
-    return b;
 }
 
-void save_chunck(board* board, char* name) {
+
+void load_chunk(char* name, board* b) {
     FILE *file;
     char filename[256];
-    snprintf(filename, sizeof(filename), "%s.eota", name);
-    file = fopen(filename, "w");
-    if (file == NULL) {
-        perror("Error opening file");
-        return;
-    }
-
-    char line[256];
-    for (int i = 0; i < board->row; i++) {
-        for (int j = 0; j < board->col; j++) {
-            Bloc bloc = board->board[i][j];
-            snprintf(line, sizeof(line), "%d %d %d\n", i, j, bloc.type);
-            fputs(line, file);
-        }
-    }
-    fclose(file);
-}
-
-board* load_chunck(char* name) {
-    FILE *file;
-    char filename[256];
-    snprintf(filename, sizeof(filename), "%s.eota", name);
+    char line[1024];
+    snprintf(filename, sizeof(filename), "chunks/%s.eota", name);
     file = fopen(filename, "r");
     if (file == NULL) {
         perror("Error opening file");
-        return NULL;
     }
 
     int row, col;
     fscanf(file, "%d %d", &row, &col);
-    board* b = init_board(row, col);
-
-    int i, j, type;
-    while (fscanf(file, "%d %d %d", &i, &j, &type) != EOF) {
-        b->board[i][j].type = type;
+    for (int i = 0; i < b->row; i++) {
+        if (fgets(line, sizeof(line), file) == NULL) {
+            fprintf(stderr, "Erreur de lecture de la ligne %d.\n", i);
+            fclose(file);
+            return;
+        }
+        // Utiliser strtok pour découper la ligne avec ',' et ';' comme séparateurs
+        char* token = strtok(line, ",");
+        for (int j = 0; j < b->col; j++) {
+            if (token == NULL) {
+                fprintf(stderr, "Nombre insuffisant à la ligne %d.\n", i);
+                fclose(file);
+                return;
+            }
+            b->board[i][j].type = atoi(token);
+            token = strtok(NULL, ",;");
+        }
     }
-
     fclose(file);
-    return b;
 }
