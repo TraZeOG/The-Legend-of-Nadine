@@ -4,12 +4,12 @@ from os import path
 
 pygame.init()
 
-def create_level(chunk):
+def create_level(name="default"):
 
     # VARIABLES -----------------------------------------------------------------------------------------------------
 
     ROW, COL = 40, 80
-    whattodraw = 0
+    whattodraw = 1
     clock = pygame.time.Clock()
     fps = 60
     tile_size = 20
@@ -91,24 +91,24 @@ def create_level(chunk):
     #création d'une liste vide -----------------------------------------------------------------------------------------------------------------------
     world_data = []
     for _ in range(ROW):
-        r = [-1] * COL
+        r = [0] * COL
         world_data.append(r)
 
     #remplissage par défaut
     for tile in range(0, ROW):
-        world_data[tile][0] = 0
-        world_data[tile][COL-1] = 0
-    world_data[(ROW-1)//2][0] = -1
-    world_data[(ROW-1)//2+1][0] = -1
-    world_data[(ROW-1)//2][COL-1] = -1
-    world_data[(ROW-1)//2+1][COL-1] = -1
+        world_data[tile][0] = 1
+        world_data[tile][COL-1] = 1
+    world_data[(ROW-1)//2][0] = 0
+    world_data[(ROW-1)//2+1][0] = 0
+    world_data[(ROW-1)//2][COL-1] = 0
+    world_data[(ROW-1)//2+1][COL-1] = 0
     for tile in range(0, COL):
-        world_data[0][tile] = 0
-        world_data[ROW-1][tile] = 0
-    world_data[0][(COL-1)//2] = -1
-    world_data[0][(COL-1)//2+1] = -1
-    world_data[ROW-1][(COL-1)//2] = -1
-    world_data[ROW-1][(COL-1)//2+1] = -1
+        world_data[0][tile] = 1
+        world_data[ROW-1][tile] = 1
+    world_data[0][(COL-1)//2] = 0
+    world_data[0][(COL-1)//2+1] = 0
+    world_data[ROW-1][(COL-1)//2] = 0
+    world_data[ROW-1][(COL-1)//2+1] = 0
     #quadrillage de départ
     def draw_grid(screen_dims):
         for i in range(screen_dims[0] // tile_size):
@@ -125,8 +125,8 @@ def create_level(chunk):
     def draw_world():
         for row in range(max(0, level_y), ROW):
             for col in range(max(0, level_x), COL):
-                if world_data[row][col] >= 0:
-                    img = pygame.transform.scale(SPRITES[world_data[row][col]], (tile_size, tile_size))
+                if world_data[row][col] > 0:
+                    img = pygame.transform.scale(SPRITES[world_data[row][col]-1], (tile_size, tile_size))
                     screen.blit(img, ((col-level_x) * tile_size, (row-level_y) * tile_size))
 
     def draw_overlay(images, screen_dims):
@@ -141,7 +141,7 @@ def create_level(chunk):
         screen.blit(images[IMG_OBJECTS_2], (screen_dims[0] * 5 // 100, screen_dims[1] - 85))
 
     def load_world_data():        
-        file_path = f'chunks/chunk_{chunk}.eota'
+        file_path = f'chunks/chunk_{name}.eota'
         if path.exists(file_path):
             with open(file_path, 'r') as file:
                 for yindex, line in enumerate(file):
@@ -152,6 +152,14 @@ def create_level(chunk):
                         for xindex, tile in enumerate(line.split(',')):
                             if tile.strip():
                                 world_data[yindex - 1][xindex] = int(tile.strip())
+
+    def save_world_data():
+        with open(f'chunks/chunk_{name}.eota', 'w') as file:
+            file.write(f'{str(ROW)},{str(COL)}\n')
+            for row in world_data:
+                for bloc in row:
+                    file.write(str(bloc) + ',')
+                file.write('\n')
 
     #main loop ------------------------------------------------------------------------------------------------------------
 
@@ -173,7 +181,7 @@ def create_level(chunk):
                 if pygame.mouse.get_pressed()[0] == 1:
                     world_data[y][x] = whattodraw
                 elif pygame.mouse.get_pressed()[2] == 1:
-                    world_data[y][x] = -1
+                    world_data[y][x] = 0
         
         
         key = pygame.key.get_pressed()
@@ -182,19 +190,14 @@ def create_level(chunk):
         draw_world()
         draw_grid(screen_dims)
         draw_overlay(images, screen_dims)
-        draw_text(f"Chunk {chunk % 100}", font_bauhaus_40, clr_black, 20, 10)
+        draw_text(f"Chunk {name}", font_bauhaus_40, clr_black, 20, 10)
 
         if save_button.draw():
-            with open(f'chunks/chunk_{chunk}.eota', 'w') as file:
-                file.write(f'{str(ROW)},{str(COL)}\n')
-                for row in world_data:
-                    for tile in row:
-                        file.write(str(tile) + ',')
-                    file.write('\n')
-
+            save_world_data()
         if load_button.draw():
-            load_world_data();
+            load_world_data()
         if exit_button.draw():
+            save_world_data()
             pygame.time.delay(300)
             run = False
  
@@ -219,12 +222,12 @@ def create_level(chunk):
             img = pygame.transform.scale(SPRITES[i], (50, 50))
             bouton_objets = Bouton(screen_width // 2 + (screen_width // (nb_sprites + 2)) * (i - nb_sprites // 2), screen_height - 70, img)
             if bouton_objets.draw():
-                whattodraw = i
-            SPRITES[whattodraw] = pygame.transform.scale(SPRITES[whattodraw], (50, 50))
-            screen.blit(SPRITES[whattodraw], (screen_width - (screen_width // 25 + 70), 75))
+                whattodraw = i + 1
+            SPRITES[whattodraw-1] = pygame.transform.scale(SPRITES[whattodraw-1], (50, 50))
+            screen.blit(SPRITES[whattodraw-1], (screen_width - (screen_width // 25 + 70), 75))
 
         #update la fenetre
         pygame.display.update()
 
 if __name__ == "__main__":
-    create_level(1)
+    create_level()
