@@ -3,18 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "unitech.h"
+#include "constants.h"
 #include <string.h>
-
-
-typedef enum {
-    VOID = 0,
-    PLAYER = 1,
-    WALL = 2,
-    ENEMY = 3,
-    LOOT = 4,
-    GATE = 5,
-} Type;
 
 typedef struct {
     Type type;

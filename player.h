@@ -3,15 +3,8 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include "unitech.h"
+#include "constants.h"
 #include "board.h"
-
-typedef enum {
-    NORTH = 'z',
-    EAST = 'd',
-    SOUTH = 's',
-    WEST = 'q'
-} Dir;
 
 typedef struct {
     int x;

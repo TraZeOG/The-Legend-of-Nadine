@@ -3,8 +3,6 @@
 
 #include "player.h"
 
-extern const wchar_t SPRITES[];
-
 void print_board(board* b);
 
 #endif
