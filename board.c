@@ -11,7 +11,7 @@
 board* init_board(int row, int col) {
     clear();
     board* b = malloc(sizeof(board));
-    b->board = malloc(sizeof(Bloc) * row);
+    b->board = malloc(sizeof(Bloc*) * row);
     for (int i = 0; i < row; i++) {
         b->board[i] = malloc(sizeof(Bloc) * col);
     }
@@ -22,7 +22,6 @@ board* init_board(int row, int col) {
 
 void default_chunk(board* b) {
     for (int i = 0; i < b->row; i++) {
-        b->board[i] = malloc(sizeof(Bloc) * b->col);
         for (int j = 0; j < b->col; j++) {
             if (i == 0 || i == b->row-1 || j == 0 || j == b->col-1) {
                 if ((i == 0 || i == b->row-1) && (j == b->col/2 || j == b->col/2 - 1) || (j == 0 || j == b->col-1) && (i == b->row/2 || i == b->row/2 - 1)) {
@@ -49,26 +48,16 @@ void load_chunk(char* name, board* b) {
     if (file == NULL) {
         perror("Error opening file");
     }
-
-    int row, col;
-    fscanf(file, "%d %d", &row, &col);
-    for (int i = 0; i < b->row; i++) {
-        if (fgets(line, sizeof(line), file) == NULL) {
-            fprintf(stderr, "Erreur de lecture de la ligne %d.\n", i);
-            fclose(file);
-            return;
+    
+    fscanf(file, "%d,%d\n", &b->row, &b->col);
+    int type;
+    for (int i=0; i < b->row; i++) {
+        for (int j=0; j< b->col; j++) {
+            fscanf(file, "%d,", &type);
+            b->board[i][j].type = type;
         }
-        // Utiliser strtok pour découper la ligne avec ',' et ';' comme séparateurs
-        char* token = strtok(line, ",");
-        for (int j = 0; j < b->col; j++) {
-            if (token == NULL) {
-                fprintf(stderr, "Nombre insuffisant à la ligne %d.\n", i);
-                fclose(file);
-                return;
-            }
-            b->board[i][j].type = atoi(token);
-            token = strtok(NULL, ",;");
-        }
+        fscanf(file, "\n");
     }
     fclose(file);
+    clear();
 }

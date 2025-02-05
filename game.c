@@ -19,7 +19,6 @@ void game (bool* in_menus, Player* player, board* board) {
         if (time_taken > refresh_rate) {
             last = now;
             move_player(player, n, board);
-            //printf("hello world\n");
             print_board(board);
         }
 
