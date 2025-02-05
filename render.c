@@ -1,14 +1,16 @@
 #include "render.h"
 
 
-
-const wchar_t SPRITES[] = {
+wchar_t SPRITES[] = {
     L' ',         // SPRITE_VOID
     L'\U0001F9D9', // SPRITE_PLAYER 🧙
     L'\U0001F9F1', // SPRITE_WALL 🧱
-    L'\U0001F9DF', // SPRITE_ENEMY 🧟
     L'\U0001F48E', // SPRITE_LOOT 💎
+    L'\U0001F9DF', // SPRITE_ENEMY 🧟
+    L'\U0001F3E0', // SPRITE_HOUSE 🏠
     L'\U0001F6AA',  // SPRITE_GATE 🚪
+    L'\U0001F9D1', // SPRITE_NPC 🧑
+    L'\U0001F333', // SPRITE_TREE 🌳
 };
 
 /**
