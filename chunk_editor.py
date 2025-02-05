@@ -33,8 +33,9 @@ def create_level(name="default"):
     house_img = pygame.image.load('assets/chunk_editor/house.webp')
     loot_img = pygame.image.load('assets/chunk_editor/loot.webp')
     enemy_img = pygame.image.load('assets/chunk_editor/enemy.webp')
-    npc_img = pygame.image.load('assets/chunk_editor/enemy.webp')
-    tree_img = pygame.image.load('assets/chunk_editor/enemy.webp')
+    gate_img = pygame.image.load('assets/chunk_editor/gate.webp')
+    npc_img = pygame.image.load('assets/chunk_editor/npc.webp')
+    tree_img = pygame.image.load('assets/chunk_editor/tree.webp')
     save_img = pygame.image.load('assets/chunk_editor/img_bouton_save.webp')
     save_img = pygame.transform.scale(save_img, (200,46))
     load_img = pygame.image.load('assets/chunk_editor/img_bouton_load.webp')
@@ -59,6 +60,7 @@ def create_level(name="default"):
         loot_img,
         enemy_img,
         house_img,
+        gate_img,
         npc_img,
         tree_img,
     ]
@@ -91,24 +93,24 @@ def create_level(name="default"):
     #création d'une liste vide -----------------------------------------------------------------------------------------------------------------------
     world_data = []
     for _ in range(ROW):
-        r = [0] * COL
+        r = [-1] * COL
         world_data.append(r)
 
     #remplissage par défaut
     for tile in range(0, ROW):
         world_data[tile][0] = 1
         world_data[tile][COL-1] = 1
-    world_data[(ROW-1)//2][0] = 0
-    world_data[(ROW-1)//2+1][0] = 0
-    world_data[(ROW-1)//2][COL-1] = 0
-    world_data[(ROW-1)//2+1][COL-1] = 0
+    world_data[(ROW-1)//2][0] = -1
+    world_data[(ROW-1)//2+1][0] = -1
+    world_data[(ROW-1)//2][COL-1] = -1
+    world_data[(ROW-1)//2+1][COL-1] = -1
     for tile in range(0, COL):
         world_data[0][tile] = 1
         world_data[ROW-1][tile] = 1
-    world_data[0][(COL-1)//2] = 0
-    world_data[0][(COL-1)//2+1] = 0
-    world_data[ROW-1][(COL-1)//2] = 0
-    world_data[ROW-1][(COL-1)//2+1] = 0
+    world_data[0][(COL-1)//2] = -1
+    world_data[0][(COL-1)//2+1] = -1
+    world_data[ROW-1][(COL-1)//2] = -1
+    world_data[ROW-1][(COL-1)//2+1] = -1
     #quadrillage de départ
     def draw_grid(screen_dims):
         for i in range(screen_dims[0] // tile_size):
@@ -151,14 +153,14 @@ def create_level(name="default"):
                     else:
                         for xindex, tile in enumerate(line.split(',')):
                             if tile.strip():
-                                world_data[yindex - 1][xindex] = int(tile.strip())
+                                world_data[yindex - 1][xindex] = int(tile.strip()) - 1
 
     def save_world_data():
         with open(f'chunks/chunk_{name}.eota', 'w') as file:
             file.write(f'{str(ROW)},{str(COL)}\n')
             for row in world_data:
                 for bloc in row:
-                    file.write(str(bloc) + ',')
+                    file.write(str(bloc+1) + ',')
                 file.write('\n')
 
     #main loop ------------------------------------------------------------------------------------------------------------
@@ -181,7 +183,7 @@ def create_level(name="default"):
                 if pygame.mouse.get_pressed()[0] == 1:
                     world_data[y][x] = whattodraw
                 elif pygame.mouse.get_pressed()[2] == 1:
-                    world_data[y][x] = 0
+                    world_data[y][x] = -1
         
         
         key = pygame.key.get_pressed()
