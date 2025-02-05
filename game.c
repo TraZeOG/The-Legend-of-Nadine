@@ -24,7 +24,7 @@ void game (bool* in_menus, Player* player, board* board) {
         }
 
         if (board->board[player->y][player->x + 1].type == GATE) {
-            load_chunk("chunk_1", board);
+            load_chunk("chunk_default", board);
         }
 
 
