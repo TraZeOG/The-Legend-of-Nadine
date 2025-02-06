@@ -3,6 +3,12 @@
 
 #include <wchar.h>
 #include <locale.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <unistd.h>
+#include <sys/time.h>
+#include <assert.h>
 #define clear() wprintf(L"\033[H\033[J")
 
 #define RED      "\x1b[31m"
@@ -31,15 +37,11 @@ typedef enum {
     GATE = 6,
     NPC = 7,
     TREE = 8,
+    CHEST = 9,
+    GHOST = 10,
+    CACTUS = 11,
+    FIRE = 12,
 } Type;
-
-typedef enum { //names speak for themselves
-    SPAWN = 0,
-    NORMAL = 1,
-    CHEST = 2,
-    MAZE = 3,
-    BOSS = 4
-} Type_c;
 
 typedef enum {
     KNIGHT = 1,
@@ -51,8 +53,13 @@ typedef enum {
     NORTH = 'z',
     EAST = 'd',
     SOUTH = 's',
-    WEST = 'q'
+    WEST = 'q',
+    ENTER = 'c'
 } Dir;
 
+typedef struct {
+    int x;
+    int y;
+} Coord;
 
 #endif

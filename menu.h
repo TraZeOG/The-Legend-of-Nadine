@@ -2,8 +2,6 @@
 #define _MENU_H
 
 #include "getch.h"
-#include <wchar.h>
-#include <locale.h>
 #include "constants.h"
 
 

@@ -1,6 +1,12 @@
 #include "board.h"
 
 
+const char* CHUNK_TYPES[] = {
+    "chunk_spawn",
+    "chunk_village",
+    "chunk_forest",
+    "chunk_plains",
+};
 
 /**
  * @brief Initializes a board with the given number of rows and columns.
@@ -25,7 +31,7 @@ void default_chunk(board* b) {
         for (int j = 0; j < b->col; j++) {
             if (i == 0 || i == b->row-1 || j == 0 || j == b->col-1) {
                 if ((i == 0 || i == b->row-1) && (j == b->col/2 || j == b->col/2 - 1) || (j == 0 || j == b->col-1) && (i == b->row/2 || i == b->row/2 - 1)) {
-                    b->board[i][j].type = GATE;
+                    b->board[i][j].type = VOID;
                 }
                 else {
                     b->board[i][j].type = WALL;
@@ -39,7 +45,7 @@ void default_chunk(board* b) {
 }
 
 
-void load_chunk(char* name, board* b) {
+void load_chunk(const char* name, board* b) {
     FILE *file;
     char filename[256];
     char line[1024];
@@ -60,4 +66,15 @@ void load_chunk(char* name, board* b) {
     }
     fclose(file);
     clear();
+}
+
+bool is_interactable(Type type) {
+    switch (type) {
+        case HOUSE:
+        case NPC:
+        case CHEST:
+            return true;
+        default:
+            return false;
+    }
 }

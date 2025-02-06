@@ -11,6 +11,10 @@ wchar_t SPRITES[] = {
     L'\U0001F6AA',  // SPRITE_GATE 🚪
     L'\U0001F9D1', // SPRITE_NPC 🧑
     L'\U0001F333', // SPRITE_TREE 🌳
+    L'\U0001F381', // SPRITE_CHEST 🎁
+    L'\U0001F47B', // SPRITE_GHOST 👻
+    L'\U0001F335', // SPRITE_CACTUS 🌵
+    L'\U0001F525', // SPRITE_FIRE 🔥
 };
 
 /**

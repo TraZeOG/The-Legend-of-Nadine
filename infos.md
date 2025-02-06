@@ -3,12 +3,12 @@
 what could be added/improved/reworked (by order of priority):
 
 - DONE unicode characters
+- DONE a player that can move
+- DONE gates
+- DONE walls
 
-- a player that can move
-- gates
 - chunck system
 - lots of game design cause i love it
-- walls
 - stargates
 - enemies
 - health system

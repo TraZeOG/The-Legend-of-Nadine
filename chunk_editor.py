@@ -29,20 +29,12 @@ def create_level(name="default"):
     img_objects = pygame.transform.scale(img_objects, (screen_width, 100))
     img_objects_2 = pygame.image.load("assets/chunk_editor/img_background_objects_2.webp")
     img_objects_2 = pygame.transform.scale(img_objects_2, (screen_width * 90 // 100, screen_height // tile_size * 4))
-    wall_img = pygame.image.load('assets/chunk_editor/wall.webp')
-    house_img = pygame.image.load('assets/chunk_editor/house.webp')
-    loot_img = pygame.image.load('assets/chunk_editor/loot.webp')
-    enemy_img = pygame.image.load('assets/chunk_editor/enemy.webp')
-    gate_img = pygame.image.load('assets/chunk_editor/gate.webp')
-    npc_img = pygame.image.load('assets/chunk_editor/npc.webp')
-    tree_img = pygame.image.load('assets/chunk_editor/tree.webp')
     save_img = pygame.image.load('assets/chunk_editor/img_bouton_save.webp')
     save_img = pygame.transform.scale(save_img, (200,46))
     load_img = pygame.image.load('assets/chunk_editor/img_bouton_load.webp')
     load_img = pygame.transform.scale(load_img, (200,46))
     exit_img = pygame.image.load("assets/chunk_editor/img_bouton_exit.webp")
     exit_img = pygame.transform.scale(exit_img, (90,50))
-
     IMG_OBJECTS = 1
     IMG_OBJECTS_2 = 2
         
@@ -55,15 +47,22 @@ def create_level(name="default"):
         exit_img
     ]
 
-    SPRITES = [
-        wall_img,
-        loot_img,
-        enemy_img,
-        house_img,
-        gate_img,
-        npc_img,
-        tree_img,
+    objects = [
+        "wall",
+        "loot",
+        "enemy",
+        "house",
+        "gate",
+        "npc",
+        "tree",
+        "chest",
+        "ghost",
+        "cactus",
+        "fire",
     ]
+    SPRITES = []
+    for obj in objects:
+        SPRITES.append(pygame.image.load(f'assets/chunk_editor/{obj}.webp'))
     nb_sprites = len(SPRITES)
 
     class Bouton():
@@ -232,4 +231,4 @@ def create_level(name="default"):
         pygame.display.update()
 
 if __name__ == "__main__":
-    create_level()
+    create_level("plain")

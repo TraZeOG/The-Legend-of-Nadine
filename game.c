@@ -18,13 +18,25 @@ void game (bool* in_menus, Player* player, board* board) {
         double time_taken = (now.tv_sec - last.tv_sec) + (now.tv_usec - last.tv_usec) * 1e-6;
         if (time_taken > refresh_rate) {
             last = now;
-            move_player(player, n, board);
+            switch (n) {
+                case 'p':
+                    run = false;
+                    *in_menus = true;
+                    break;
+                case NORTH:
+                case SOUTH:
+                case WEST:
+                case EAST:
+                    move_player(player, n, board);
+                    break;
+                case 'c':
+                    interact(player, board);
+                    break;
+            }
             print_board(board);
         }
 
-        if (board->board[player->y][player->x + 1].type == GATE) {
-            load_chunk("chunk_default", board);
-        }
+
 
 
         usleep(10000); 
