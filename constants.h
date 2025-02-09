@@ -19,6 +19,15 @@
 #define CYAN     "\x1b[36m"
 #define WHITE    "\x1b[0m"
 
+
+#define DEFAULT_ROW 40
+#define DEFAULT_COL 80
+#define NB_CHUNKS 4
+/*
+#define NB_TYPES 13
+#define NB_HOUSES 4*/
+#define Board_type int
+
 typedef enum {
     HOMEPAGE = 1,
     USERNAME = 2,
@@ -61,5 +70,6 @@ typedef struct {
     int x;
     int y;
 } Coord;
+
 
 #endif
