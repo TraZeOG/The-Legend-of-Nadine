@@ -9,11 +9,19 @@
 typedef struct {
     int x;
     int y;
+    int health;
+    int alt_x;
+    int alt_y;
+    int chunk_x;
+    int chunk_y;
+    int status;
 } Player;
 
-void move_player(Player* player, Dir dir, board* board);
-bool check_collision(Player* player, int x, int y, board* board);
-void handle_player_pos(Player* player, board* board);
-void interact(Player* player, board* board);
+void move_player(Player* player, Dir dir, Board* board, Map* map);
+void put_player_on_board(Board* board, Player* player);
+bool check_collision(Player* player, int x, int y, Board* board);
+void handle_player_pos(Player* player, Board* board, Map* map);
+void handle_map(Player* player, Map* map);
+void interact(Player* player, Board* board);
 
 #endif

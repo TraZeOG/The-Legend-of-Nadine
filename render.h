@@ -3,6 +3,6 @@
 
 #include "player.h"
 
-void print_board(board* b);
+void print_board(Board* b);
 
 #endif

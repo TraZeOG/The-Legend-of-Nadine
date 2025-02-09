@@ -3,5 +3,6 @@
 
 #include "menu.h"
 #include "game.h"
+#include "music.h"
 
 #endif

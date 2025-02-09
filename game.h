@@ -3,10 +3,9 @@
 
 #include "render.h"
 #include "getch.h"
+#include "dynarray.h"
 
 
-void game (bool* in_menus, Player* player, board* board);
-void save();
-void load();
+void game (bool* in_menus);
 
 #endif

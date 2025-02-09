@@ -2,17 +2,21 @@
 
 
 
-void move_player(Player* player, Dir input, board* board) {
+void move_player(Player* player, Dir input, Board* board, Map* map) {
     board->board[player->y][player->x].type = VOID;
     if (input == NORTH && !check_collision(player, player->x, player->y - 1, board)) player->y--;
     if (input == SOUTH && !check_collision(player, player->x, player->y + 1, board)) player->y++;
     if (input == WEST && !check_collision(player, player->x - 1, player->y, board)) player->x--;
     if (input == EAST && !check_collision(player, player->x + 1, player->y, board)) player->x++;
-    handle_player_pos(player, board);
+    handle_player_pos(player, board, map);
+    put_player_on_board(board, player);
+}
+
+void put_player_on_board(Board* board, Player* player) {
     board->board[player->y][player->x].type = PLAYER;
 }
 
-bool check_collision(Player* player, int x, int y, board* board) {
+bool check_collision(Player* player, int x, int y, Board* board) {
     if (board->board[y][x].type != VOID) {
         return true;
     }
@@ -21,31 +25,55 @@ bool check_collision(Player* player, int x, int y, board* board) {
     }
 }
 
-void handle_player_pos(Player* player, board* board) {
-    if (player->x == 0 || player->x == (board->col - 1) || player->y == 0 || player->y == (board->row - 1)) {
-        int nb = rand() % NB_CHUNKS;
-        assert(nb < NB_CHUNKS && nb >= 0);
-        load_chunk(CHUNK_TYPES[nb], board);
+void handle_map(Player* player, Map* map) {
+    if (player->chunk_x < 0) {
+        expand(map, 2, 1, true);
     }
-    if (player->x == 0) {
-        player->x = board->col - 2;
+    if (player->chunk_y < 0) {
+        expand(map, 1, 2, true);
     }
-    if (player->x == (board->col - 1)) {
-        player->x = 1;
+    if (player->chunk_x >= map->x_size) {
+        expand(map, 2, 1, false);
     }
-    if (player->y == 0) {
-        player->y = board->row - 2;
+    if (player->chunk_y >= map->y_size) {
+        expand(map, 1, 2, false);
     }
-    if (player->y == (board->row - 1)) {
-        player->y = 1;
-    }
-
 }
 
-void interaction(Player* player, board* board, Type type) {
+void handle_player_pos(Player* player, Board* board, Map* map) {
+    if (player->x == 0) {
+        player->chunk_x--;
+        player->x = board->col - 2;
+        handle_map(player, map);
+        load_chunk(CHUNK_TYPES[map->chunk[player->chunk_x][player->chunk_y]], board);
+    }
+    if (player->x == board->col - 1) {
+        player->chunk_x++;
+        player->x = 1;
+        handle_map(player, map);
+        load_chunk(CHUNK_TYPES[map->chunk[player->chunk_x][player->chunk_y]], board);
+    }
+    if (player->y == 0) {
+        player->chunk_y--;
+        player->y = board->row - 2;
+        handle_map(player, map);
+        load_chunk(CHUNK_TYPES[map->chunk[player->chunk_x][player->chunk_y]], board);
+    }
+    if (player->y == board->row - 1) {
+        player->chunk_y++;
+        player->y = 1;
+        handle_map(player, map);
+        load_chunk(CHUNK_TYPES[map->chunk[player->chunk_x][player->chunk_y]], board);
+    }
+}
+
+void interaction(Player* player, Board* board, Type type) {
     switch (type) {
         case HOUSE:
-            load_chunk(CHUNK_TYPES[0], board);
+            player->y = board->row - 2;
+            player->x = board->col / 2;
+            load_chunk(CHUNK_HOUSE[0], board);
+            put_player_on_board(board, player);
             break;
         case NPC:
             break;
@@ -55,7 +83,7 @@ void interaction(Player* player, board* board, Type type) {
     }
 }
 
-void interact(Player* player, board* board) {
+void interact(Player* player, Board* board) {
     assert(player->x > 0 && player->x < board->col - 1 && player->y > 0 && player->y < board->row - 1);
     if (is_interactable(board->board[player->y - 1][player->x].type)) {
         interaction(player, board, board->board[player->y - 1][player->x].type);

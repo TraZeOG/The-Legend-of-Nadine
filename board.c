@@ -8,15 +8,22 @@ const char* CHUNK_TYPES[] = {
     "chunk_plains",
 };
 
+const char* CHUNK_HOUSE[] = {
+    "house/chunk_house1",
+    "house/chunk_house2",
+    "house/chunk_house3",
+    "house/chunk_house4",
+};
+
 /**
  * @brief Initializes a board with the given number of rows and columns.
  * @param row The number of rows for the board.
  * @param col The number of columns for the board.
  * @return A pointer to the initialized board structure.
  */
-board* init_board(int row, int col) {
+Board* init_board(int row, int col) {
     clear();
-    board* b = malloc(sizeof(board));
+    Board* b = malloc(sizeof(Board));
     b->board = malloc(sizeof(Bloc*) * row);
     for (int i = 0; i < row; i++) {
         b->board[i] = malloc(sizeof(Bloc) * col);
@@ -26,7 +33,7 @@ board* init_board(int row, int col) {
     return b;
 }
 
-void default_chunk(board* b) {
+void default_chunk(Board* b) {
     for (int i = 0; i < b->row; i++) {
         for (int j = 0; j < b->col; j++) {
             if (i == 0 || i == b->row-1 || j == 0 || j == b->col-1) {
@@ -45,7 +52,7 @@ void default_chunk(board* b) {
 }
 
 
-void load_chunk(const char* name, board* b) {
+void load_chunk(const char* name, Board* b) {
     FILE *file;
     char filename[256];
     char line[1024];

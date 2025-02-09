@@ -21,7 +21,7 @@ wchar_t SPRITES[] = {
  * @brief Prints the board to the console.
  * @param b A pointer to the board structure to be printed.
  */
-void print_board(board* b) {
+void print_board(Board* b) {
     setlocale(LC_ALL, "");
     wprintf(L"\033[H");
     for (int i = 0; i < b->row; i++) {
