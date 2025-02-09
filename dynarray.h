@@ -2,21 +2,16 @@
 #define _DYNARRAY_H
 
 #define INITIAL_CAPACITY 10
+#include "constants.h"
 
 typedef struct {
-    int type;
-    bool loaded;
-} Chunck;
-
-typedef struct {
-    Chunck** chunck;
-    size_t capacity;
+    Type** chunk;
+    int x_size;
+    int y_size;
 } Map;
 
 Map* create_map();
-size_t len(Map* map);
-int get_chunck(Map* map, Coord* cos);
-void expand(Map* map);
-void free(Map* map);
+void expand(Map* map, int mult_x, int mult_y, bool reverse);
+void free_map(Map* map);
 
 #endif

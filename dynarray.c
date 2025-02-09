@@ -1,48 +1,17 @@
-#include <dynarray.h>
-
-/**
- * @brief Initializes a dynamic array.
- * @param array Pointer to the dynamic array to be initialized.
- */
-
-Chunk* create_chunk(int type, int x, int y) {
-    Chunk* chunk = malloc(sizeof(Chunk));
-    chunk->loaded = false;
-    chunk->type = type;
-    chunk->x = x;
-    chunk->y = y;
-}
+#include "dynarray.h"
 
 Map* create_map() {
     Map* map = malloc(sizeof(Map));
-    map->chunk = malloc(INITIAL_CAPACITY * sizeof(Chunk**));
-    map->capacity = INITIAL_CAPACITY;
+    map->chunk = malloc(sizeof(Type*) * INITIAL_CAPACITY);
+    map->x_size = INITIAL_CAPACITY;
+    map->y_size = INITIAL_CAPACITY;
     for(size_t i = 0; i < INITIAL_CAPACITY; i++){
-        array->chunk[i] = malloc(sizeof(Chunk*));
+        map->chunk[i] = malloc(sizeof(Type) * INITIAL_CAPACITY);
         for (size_t j = 0; j < INITIAL_CAPACITY; j++) {
-            array->chunk[i][j] = create_chunk(rand()%NB_TYPES, i, j);
+            map->chunk[i][j] = rand()%NB_CHUNKS;
         }
     }
     return map;
-}
-
-/**
- * @brief Returns the length of the dynamic array.
- * @param array Pointer to the dynamic array.
- * @return The number of elements in the dynamic array.
- */
-size_t len(Map* map) {
-    return map->capacity;
-}
-
-/**
- * @brief Retrieves an element from the dynamic array.
- * @param array Pointer to the dynamic array.
- * @param index The index of the element to retrieve.
- * @return The element at the specified index, or -1 if the index is out of bounds.
- */
-Chunk* get_chunk(Map* map, Cos* cos) {
-    return &(map->chunk[cos->x][cos->y]);
 }
 
 /**
@@ -52,28 +21,33 @@ Chunk* get_chunk(Map* map, Cos* cos) {
  * @param value The value of the element to insert.
  * @return true if the insertion was successful, false otherwise.
  */
-void expand(Map* map) {
-    Chunk** new_chunks = malloc(sizeof(Chunk**) * 2 * map->capacity);
-    for (size_t i = 0; i < map->capacity; i++) {
-        new_chunks[i] = malloc(sizeof(Chunk*) * 2 * map->capacity);
-        for (size_t j = 0; j < map->capacity; j++) {
-            new_chunks[i][j] = map->chunk[i][j];
+void expand(Map* map, int mult_x, int mult_y, bool reverse) {
+    Type** new_chunks = malloc(sizeof(Type*) * mult_y * map->y_size);
+    for (size_t i = 0; i < map->y_size; i++) {
+        new_chunks[i] = malloc(sizeof(Type) * mult_x * map->x_size);
+        int offset_x = 0;
+        int offset_y = 0;
+        if (reverse) {
+            offset_x = map->x_size - 1;
+            offset_y = map->y_size - 1;
+        }
+        for (size_t j = 0; j < map->x_size; j++) {
+            new_chunks[i + offset_y][j + offset_x] = map->chunk[i][j];
         }
     }
     free(map->chunk);
     map->chunk = new_chunks;
-    map->capacity *= 2;
+    map->x_size = mult_x * map->x_size;
+    map->y_size = mult_y * map->y_size;
 }
 
 /**
  * @brief Frees the memory allocated for the dynamic array.
  * @param array Pointer to the dynamic array to be freed.
  */
-void free(Map* map) {
-    free(array->data);
-    array->data = NULL;
-    array->size = 0;
-    array->capacity = 0;
+void free_map(Map* map) {
+    free(map->chunk);
+    free(map);
 }
 
 
