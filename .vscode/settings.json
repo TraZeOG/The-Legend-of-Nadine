@@ -60,6 +60,7 @@
   "files.associations": {
     "player.h": "c",
     "board.h": "c",
-    "constants.h": "c"
+    "constants.h": "c",
+    "dynarray.h": "c"
   }
 }

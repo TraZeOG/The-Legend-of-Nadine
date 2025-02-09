@@ -4,11 +4,11 @@ from os import path
 
 pygame.init()
 
-def create_level(name="default"):
+def create_level(name="default", row = 40, col = 80):
 
     # VARIABLES -----------------------------------------------------------------------------------------------------
 
-    ROW, COL = 40, 80
+    ROW, COL = row, col
     whattodraw = 1
     clock = pygame.time.Clock()
     fps = 60
@@ -231,4 +231,4 @@ def create_level(name="default"):
         pygame.display.update()
 
 if __name__ == "__main__":
-    create_level("plain")
+    create_level("house", 20, 40)
