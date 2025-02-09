@@ -1,1 +1,1 @@
-gcc -g  main.c board.c player.c menu.c getch.c game.c render.c
+gcc -g  main.c board.c player.c menu.c getch.c game.c render.c music.c dynarray.c -lSDL2 -lSDL2_mixer
