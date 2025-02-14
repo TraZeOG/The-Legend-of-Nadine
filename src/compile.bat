@@ -1,0 +1,1 @@
+gcc -g  main.c modules/board.c modules/player.c modules/menu.c modules/getch.c modules/game.c modules/render.c modules/music.c modules/dynarray.c -lSDL2 -lSDL2_mixer

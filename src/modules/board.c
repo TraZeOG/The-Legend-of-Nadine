@@ -56,7 +56,7 @@ void load_chunk(const char* name, Board* b) {
     FILE *file;
     char filename[256];
     char line[1024];
-    snprintf(filename, sizeof(filename), "chunks/%s.eota", name);
+    snprintf(filename, sizeof(filename), "assets/chunks/%s.eota", name);
     file = fopen(filename, "r");
     if (file == NULL) {
         perror("Error opening file");
