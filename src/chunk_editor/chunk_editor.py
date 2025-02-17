@@ -24,16 +24,16 @@ def create_level(name="default", row = 40, col = 80):
     screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 
     #les images
-    bg_img = pygame.image.load('assets/chunk_editor/img_background1.webp')
-    img_objects = pygame.image.load("assets/chunk_editor/img_background_objects.webp")
+    bg_img = pygame.image.load('src/chunk_editor/assets/img_background1.webp')
+    img_objects = pygame.image.load("src/chunk_editor/assets/img_background_objects.webp")
     img_objects = pygame.transform.scale(img_objects, (screen_width, 100))
-    img_objects_2 = pygame.image.load("assets/chunk_editor/img_background_objects_2.webp")
+    img_objects_2 = pygame.image.load("src/chunk_editor/assets/img_background_objects_2.webp")
     img_objects_2 = pygame.transform.scale(img_objects_2, (screen_width * 90 // 100, screen_height // tile_size * 4))
-    save_img = pygame.image.load('assets/chunk_editor/img_bouton_save.webp')
+    save_img = pygame.image.load('src/chunk_editor/assets/img_bouton_save.webp')
     save_img = pygame.transform.scale(save_img, (200,46))
-    load_img = pygame.image.load('assets/chunk_editor/img_bouton_load.webp')
+    load_img = pygame.image.load('src/chunk_editor/assets/img_bouton_load.webp')
     load_img = pygame.transform.scale(load_img, (200,46))
-    exit_img = pygame.image.load("assets/chunk_editor/img_bouton_exit.webp")
+    exit_img = pygame.image.load("src/chunk_editor/assets/img_bouton_exit.webp")
     exit_img = pygame.transform.scale(exit_img, (90,50))
     IMG_OBJECTS = 1
     IMG_OBJECTS_2 = 2
@@ -62,7 +62,7 @@ def create_level(name="default", row = 40, col = 80):
     ]
     SPRITES = []
     for obj in objects:
-        SPRITES.append(pygame.image.load(f'assets/chunk_editor/{obj}.webp'))
+        SPRITES.append(pygame.image.load(f'src/chunk_editor/assets/{obj}.webp'))
     nb_sprites = len(SPRITES)
 
     class Bouton():
@@ -155,7 +155,7 @@ def create_level(name="default", row = 40, col = 80):
                                 world_data[yindex - 1][xindex] = int(tile.strip()) - 1
 
     def save_world_data():
-        with open(f'chunks/chunk_{name}.eota', 'w') as file:
+        with open(f'src/assets/chunks/chunk_{name}.eota', 'w') as file:
             file.write(f'{str(ROW)},{str(COL)}\n')
             for row in world_data:
                 for bloc in row:
@@ -231,4 +231,4 @@ def create_level(name="default", row = 40, col = 80):
         pygame.display.update()
 
 if __name__ == "__main__":
-    create_level("house", 20, 40)
+    create_level("house4", 20, 40)
