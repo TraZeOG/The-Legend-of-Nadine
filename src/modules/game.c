@@ -22,7 +22,7 @@ void game (bool* in_menus) {
         if (time_taken > refresh_rate) {
             last = now;
             switch (n) {
-                case 'p':
+                case QUIT:
                     run = false;
                     *in_menus = true;
                     break;
@@ -32,7 +32,7 @@ void game (bool* in_menus) {
                 case EAST:
                     move_player(&player, n, board, map);
                     break;
-                case 'c':
+                case INTERACT:
                     interact(&player, board);
                     break;
             }

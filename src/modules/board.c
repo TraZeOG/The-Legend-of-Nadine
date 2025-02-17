@@ -52,6 +52,14 @@ void default_chunk(Board* b) {
 }
 
 
+void add_bloc_infos(Bloc_type type, Board* b, int i, int j) {
+    switch (type) {
+        case HOUSE:
+            b->board[i][j].version = rand()%NB_HOUSES;
+    }
+} 
+
+
 void load_chunk(const char* name, Board* b) {
     FILE *file;
     char filename[256];
@@ -68,6 +76,7 @@ void load_chunk(const char* name, Board* b) {
         for (int j=0; j< b->col; j++) {
             fscanf(file, "%d,", &type);
             b->board[i][j].type = type;
+            add_bloc_infos(type, b, i, j);
         }
         fscanf(file, "\n");
     }
@@ -75,7 +84,7 @@ void load_chunk(const char* name, Board* b) {
     clear();
 }
 
-bool is_interactable(Type type) {
+bool is_interactable(Bloc_type type) {
     switch (type) {
         case HOUSE:
         case NPC:

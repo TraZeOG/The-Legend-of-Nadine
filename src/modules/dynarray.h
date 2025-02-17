@@ -5,7 +5,7 @@
 #include "constants.h"
 
 typedef struct {
-    Type** chunk;
+    Bloc_type** chunk;
     int x_size;
     int y_size;
 } Map;
