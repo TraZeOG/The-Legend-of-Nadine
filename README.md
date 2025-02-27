@@ -1,6 +1,6 @@
-# 🌌 Echoes of the Abyss 🌌
+# 🌌 The Legend of Nadine  🌌
 
-**Echoes of the Abyss** is a terminal-based dungeon game where players explore an infinite world filled with unique chunks, each offering distinct adventures and challenges.
+**The Legend of Nadine** is a terminal-based dungeon game where players explore an infinite world filled with unique chunks, each offering distinct adventures and challenges.
 
 ## 📜 Table of Contents
 - [About](#about)
@@ -12,7 +12,7 @@
 
 ## 🌟 About
 
-**Echoes of the Abyss** is an immersive terminal game where players explore an infinite world. The game features a variety of chunks (forests, plains, villages, etc.), each with its own unique characteristics and challenges. Players can move freely, discover secrets, battle enemies, and complete quests.
+**The Legend of Nadine** is an immersive terminal game where players explore an infinite world. The game features a variety of chunks (forests, plains, villages, etc.), each with its own unique characteristics and challenges. Players can move freely, discover secrets, battle enemies, and complete quests.
 
 ## 🚀 Features
 
@@ -24,7 +24,7 @@
 
 ## 📂 Project Structure
 ```
-Echoes-of-the-Abyss/
+TLON/
 ├── src/ # Source code of the game
 │ ├── assets/ # Game assets (images, music, etc.)
 │ ├── chunks/ # Chunk configuration files
@@ -43,8 +43,8 @@ Echoes-of-the-Abyss/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/Echoes-of-the-Abyss.git
-   cd Echoes-of-the-Abyss
+   git clone https://github.com/your-username/The-Legend-of-Nadine.git
+   cd The-Legend-of-Nadine
    ```
 2. **Compile the game**:
    ```bash
