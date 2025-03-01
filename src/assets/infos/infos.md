@@ -15,3 +15,7 @@ what could be added/improved/reworked (by order of priority):
 - hotbars
 - score system?
 - multiplayer omg?? (spoiler no)
+
+modules needed to run the game:
+
+- SDL2

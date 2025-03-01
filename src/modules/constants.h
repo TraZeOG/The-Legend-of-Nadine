@@ -23,9 +23,8 @@
 #define DEFAULT_ROW 40
 #define DEFAULT_COL 80
 #define NB_CHUNKS 4
-/*
 #define NB_TYPES 13
-#define NB_HOUSES 4*/
+#define NB_HOUSES 4
 #define Board_type int
 
 typedef enum {
@@ -50,7 +49,7 @@ typedef enum {
     GHOST = 10,
     CACTUS = 11,
     FIRE = 12,
-} Type;
+} Bloc_type;
 
 typedef enum {
     KNIGHT = 1,
@@ -63,7 +62,8 @@ typedef enum {
     EAST = 'd',
     SOUTH = 's',
     WEST = 'q',
-    ENTER = 'c'
+    INTERACT = 'c',
+    QUIT = 'p',
 } Dir;
 
 typedef struct {

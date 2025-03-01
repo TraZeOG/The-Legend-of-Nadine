@@ -67,12 +67,12 @@ void handle_player_pos(Player* player, Board* board, Map* map) {
     }
 }
 
-void interaction(Player* player, Board* board, Type type) {
+void get_interaction(Player* player, Board* board, Bloc_type type, int version) {
     switch (type) {
         case HOUSE:
             player->y = board->row - 2;
             player->x = board->col / 2;
-            load_chunk(CHUNK_HOUSE[0], board);
+            load_chunk(CHUNK_HOUSE[version], board);
             put_player_on_board(board, player);
             break;
         case NPC:
@@ -86,15 +86,15 @@ void interaction(Player* player, Board* board, Type type) {
 void interact(Player* player, Board* board) {
     assert(player->x > 0 && player->x < board->col - 1 && player->y > 0 && player->y < board->row - 1);
     if (is_interactable(board->board[player->y - 1][player->x].type)) {
-        interaction(player, board, board->board[player->y - 1][player->x].type);
+        get_interaction(player, board, board->board[player->y - 1][player->x].type, board->board[player->y - 1][player->x].version);
     }
     if (is_interactable(board->board[player->y + 1][player->x].type)) {
-        interaction(player, board, board->board[player->y + 1][player->x].type);
+        get_interaction(player, board, board->board[player->y + 1][player->x].type, board->board[player->y - 1][player->x].version);
     }
     if (is_interactable(board->board[player->y][player->x - 1].type)) {
-        interaction(player, board, board->board[player->y][player->x - 1].type);
+        get_interaction(player, board, board->board[player->y][player->x - 1].type, board->board[player->y - 1][player->x].version);
     }
     if (is_interactable(board->board[player->y][player->x + 1].type)) {
-        interaction(player, board, board->board[player->y][player->x + 1].type);
+        get_interaction(player, board, board->board[player->y][player->x + 1].type, board->board[player->y - 1][player->x].version);
     }
 }

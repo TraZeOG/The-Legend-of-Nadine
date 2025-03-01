@@ -2,11 +2,11 @@
 
 Map* create_map() {
     Map* map = malloc(sizeof(Map));
-    map->chunk = malloc(sizeof(Type*) * INITIAL_CAPACITY);
+    map->chunk = malloc(sizeof(Bloc_type*) * INITIAL_CAPACITY);
     map->x_size = INITIAL_CAPACITY;
     map->y_size = INITIAL_CAPACITY;
     for(size_t i = 0; i < INITIAL_CAPACITY; i++){
-        map->chunk[i] = malloc(sizeof(Type) * INITIAL_CAPACITY);
+        map->chunk[i] = malloc(sizeof(Bloc_type) * INITIAL_CAPACITY);
         for (size_t j = 0; j < INITIAL_CAPACITY; j++) {
             map->chunk[i][j] = rand()%NB_CHUNKS;
         }
@@ -22,9 +22,9 @@ Map* create_map() {
  * @return true if the insertion was successful, false otherwise.
  */
 void expand(Map* map, int mult_x, int mult_y, bool reverse) {
-    Type** new_chunks = malloc(sizeof(Type*) * mult_y * map->y_size);
+    Bloc_type** new_chunks = malloc(sizeof(Bloc_type*) * mult_y * map->y_size);
     for (size_t i = 0; i < map->y_size; i++) {
-        new_chunks[i] = malloc(sizeof(Type) * mult_x * map->x_size);
+        new_chunks[i] = malloc(sizeof(Bloc_type) * mult_x * map->x_size);
         int offset_x = 0;
         int offset_y = 0;
         if (reverse) {
