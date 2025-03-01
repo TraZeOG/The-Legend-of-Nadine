@@ -34,5 +34,15 @@ void print_board(Board* b) {
         }
         wprintf(L"\n");
     }
+}
+
+void print_overlay() {
+    wprintf(L"Hello world\n");
+}
+
+
+void render_screen(Board* b) {
+    print_board(b);
+    print_overlay();
     fflush(stdout); 
 }

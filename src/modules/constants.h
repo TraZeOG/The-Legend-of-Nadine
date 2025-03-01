@@ -71,5 +71,12 @@ typedef struct {
     int y;
 } Coord;
 
+typedef enum {
+    CLEAR = 1,
+    TALKING = 2,
+    INTERACTING = 3,
+    BUSY = 4
+} Enemy;
+
 
 #endif

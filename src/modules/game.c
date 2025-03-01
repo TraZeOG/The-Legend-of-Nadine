@@ -36,7 +36,7 @@ void game (bool* in_menus) {
                     interact(&player, board);
                     break;
             }
-            print_board(board);
+            render_screen(board);
         }
 
 

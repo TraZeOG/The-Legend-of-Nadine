@@ -4,5 +4,7 @@
 #include "player.h"
 
 void print_board(Board* b);
+void print_overlay();
+void render_screen(Board* b);
 
 #endif
