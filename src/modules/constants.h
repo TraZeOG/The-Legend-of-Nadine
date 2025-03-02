@@ -76,7 +76,7 @@ typedef enum {
     TALKING = 2,
     INTERACTING = 3,
     BUSY = 4
-} Enemy;
+} Mode;
 
 
 #endif
