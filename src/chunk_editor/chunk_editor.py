@@ -4,10 +4,13 @@ from os import path
 
 pygame.init()
 
+BASE_PATH = 'src/assets/chunks/'
+
 def create_level(name="default", row = 40, col = 80):
 
     # VARIABLES -----------------------------------------------------------------------------------------------------
 
+    global ROW, COL
     ROW, COL = row, col
     whattodraw = 1
     clock = pygame.time.Clock()
@@ -59,6 +62,15 @@ def create_level(name="default", row = 40, col = 80):
         "ghost",
         "cactus",
         "fire",
+        "cat",
+        "toilet",
+        "flower",
+        "rose",
+        "bed",
+        "palmier",
+        "mountain",
+        "moai",
+        "amphore",
     ]
     SPRITES = []
     for obj in objects:
@@ -142,7 +154,7 @@ def create_level(name="default", row = 40, col = 80):
         screen.blit(images[IMG_OBJECTS_2], (screen_dims[0] * 5 // 100, screen_dims[1] - 85))
 
     def load_world_data():        
-        file_path = f'chunks/chunk_{name}.eota'
+        file_path = f'{BASE_PATH}/{name}.eota'
         if path.exists(file_path):
             with open(file_path, 'r') as file:
                 for yindex, line in enumerate(file):
@@ -155,7 +167,7 @@ def create_level(name="default", row = 40, col = 80):
                                 world_data[yindex - 1][xindex] = int(tile.strip()) - 1
 
     def save_world_data():
-        with open(f'src/assets/chunks/chunk_{name}.eota', 'w') as file:
+        with open(f'{BASE_PATH}/{name}.eota', 'w') as file:
             file.write(f'{str(ROW)},{str(COL)}\n')
             for row in world_data:
                 for bloc in row:
@@ -231,4 +243,4 @@ def create_level(name="default", row = 40, col = 80):
         pygame.display.update()
 
 if __name__ == "__main__":
-    create_level("house4", 20, 40)
+    create_level("house/chunk_house5", 20, 40)

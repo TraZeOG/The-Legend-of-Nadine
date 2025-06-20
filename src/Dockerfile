@@ -1,5 +1,8 @@
 FROM ubuntu:22.04
 
+RUN chmod +x /app/game
+RUN go build -o game
+
 # Updates packages, install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \

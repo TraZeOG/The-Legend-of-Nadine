@@ -37,7 +37,7 @@ void print_board(Board* b) {
 }
 
 void print_overlay() {
-    wprintf(L"Hello world\n");
+    wprintf(L"Hello world et ta grand mzre aussi\n");
 }
 
 
