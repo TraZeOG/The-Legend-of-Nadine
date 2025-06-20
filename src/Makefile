@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -g -Wall -Wextra -Iinclude
 
 # Libraries
-LDFLAGS = -lSDL2 -lSDL2_mixer
+# LDFLAGS = -lSDL2 -lSDL2_mixer
 
 # Modules dir
 MODULES_DIR = modules
@@ -16,8 +16,8 @@ SRCS = main.c \
        $(MODULES_DIR)/getch.c \
        $(MODULES_DIR)/game.c \
        $(MODULES_DIR)/render.c \
-       $(MODULES_DIR)/music.c \
        $(MODULES_DIR)/dynarray.c
+       #$(MODULES_DIR)/music.c \ 
 
 # Object files
 OBJS = $(SRCS:.c=.o)

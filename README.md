@@ -4,7 +4,6 @@
 
 ## 📜 Table of Contents
 - [About](#about)
-- [Features](#features)
 - [Project Structure](#project-structure)
 - [How to Play](#how-to-play)
 - [Contributing](#contributing)
@@ -14,29 +13,21 @@
 
 **The Legend of Nadine** is an immersive terminal game where players explore an infinite world. The game features a variety of chunks (forests, plains, villages, etc.), each with its own unique characteristics and challenges. Players can move freely, discover secrets, battle enemies, and complete quests.
 
-## 🚀 Features
-
-- **Infinite World**: Explore a procedurally generated world with diverse chunks.
-- **Free Movement**: Move in all directions to discover new areas.
-- **Unique Chunks**: Each chunk (forest, plain, village, etc.) offers a unique experience.
-- **Dynamic Adventures**: Encounter enemies, solve puzzles, and complete quests.
-- **Terminal Interface**: A simple and intuitive interface designed for terminal play.
-
 ## 📂 Project Structure
 ```
 TLON/
-├── src/ # Source code of the game
+├── src/ # Source code
 │ ├── assets/ # Game assets (images, music, etc.)
-│ ├── chunks/ # Chunk configuration files
-│ ├── displays/ # Game screens (homepage, death screen, etc.)
-│ ├── infos/ # Additional information
-│ ├── musics/ # Music files
+│ ├── chunks/ # Chunk config
+│ ├── displays/ # Game screens
+│ ├── infos/ # Additional info
+│ ├── musics/
 │ ├── chunk_editor/ # Chunk editing tool
 │ ├── modules/ # Game modules (player, render, etc.)
 │ └── a.out # Game executable
-├── README.md # README file
-├── brief.txt # Brief description of the project
-└── .gitignore # File to ignore unwanted files in Git
+├── README.md
+├── brief.txt
+└── .gitignore
 ```
 
 ## 🎮 How to Play
